@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  
+  --color-marfil: #FBFBFA;
+  --color-arena-light: #F4F0E8;
+  --color-arena-medium: #E2DACB;
+  --color-carbón: #111313;
+  --color-carbón-light: #1D2020;
+  --color-océano: #2B424D;
+  --color-oliva: #4E5340;
+  
+  --animate-fade-in-up: fade-in-up 1s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #FBFBFA;
+  color: #111313;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FBFBFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #E2DACB;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2B424D;
+}
+
+/* Custom subtle parallax/background effects */
+.asymmetric-border {
+  border-radius: 4px;
+}
+
+.glow-subtle {
+  box-shadow: 0 10px 30px -15px rgba(43, 66, 77, 0.15);
+}
+

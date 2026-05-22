@@ -1,0 +1,6 @@
+{
+  "name": "AURA Residencial",
+  "description": "Exclusiva landing page residencial de lujo para el proyecto AURA en Coronado, Panamá.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
