@@ -21,10 +21,10 @@ export const Hero: React.FC<HeroProps> = ({ onScrollDown }) => {
         >
           {/* Priority 1: User requested video drone4k.mp4 */}
           <source src="/drone4k.mp4" type="video/mp4" />
+          {/* Priority 2: Alternate local fallbacks */}
           <source src="/video_hero.mp4" type="video/mp4" />
-          <source src="/hero_video.mp4" type="video/mp4" />
           <source src="/hero.mp4" type="video/mp4" />
-          {/* Priority 2: Exquisite tropical ocean drone video fallback */}
+          {/* Priority 3: Exquisite tropical ocean drone video external fallback */}
           <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0548a7d433230c24d50013028cf5603&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
         </video>
         

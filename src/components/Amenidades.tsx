@@ -15,6 +15,11 @@ import {
   Maximize2
 } from "lucide-react";
 
+import beachClubImg from "../assets/images/beach_club_1780069221234.png";
+import poolsImg from "../assets/images/resort_pools_1780069241691.png";
+import gymImg from "../assets/images/luxury_gym_1780069258603.png";
+import gazeboImg from "../assets/images/gazebo_bar_1780069282323.png";
+
 export const Amenidades: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -23,7 +28,8 @@ export const Amenidades: React.FC = () => {
     "Piscinas para adultos",
     "Piscina para niños",
     "Canchas multiusos",
-    "Gazebo general con bar",
+    "Gazebo general con bar y área de BBQ",
+    "Solarium",
     "Parque recreacional",
     "Dog-park",
     "Salón de eventos",
@@ -35,19 +41,19 @@ export const Amenidades: React.FC = () => {
   const galleryImages = [
     { 
       id: "beach-club", 
-      url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+      url: beachClubImg,
     },
     { 
       id: "pools", 
-      url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80",
+      url: poolsImg,
     },
     { 
       id: "gym", 
-      url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+      url: gymImg,
     },
     { 
       id: "gazebo", 
-      url: "https://images.unsplash.com/photo-1563189914-ee364338f74e?auto=format&fit=crop&w=1200&q=80",
+      url: gazeboImg,
     }
   ];
 
@@ -60,22 +66,22 @@ export const Amenidades: React.FC = () => {
   };
 
   return (
-    <section id="amenidades" className="bg-black py-20 md:py-32 px-6 md:px-12 relative text-white border-t border-arena-medium/10">
+    <section id="amenidades" className="bg-arena-light py-20 md:py-32 px-6 md:px-12 relative text-carbón border-t border-arena-medium/40">
       <div className="max-w-7xl mx-auto">
         
          {/* Section Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 md:mb-24">
           <div className="lg:col-span-6">
-            <h2 className="font-serif text-3xl sm:text-5xl md:text-5xl font-light tracking-tight text-marfil leading-tight">
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-5xl font-light tracking-tight text-carbón leading-tight">
               El mar se encuentra con la arena.
               <br />
-              <span className="italic font-normal text-arena-medium">El lujo, con el confort.</span>
+              <span className="italic font-normal text-carbón/70">El lujo, con el confort.</span>
             </h2>
           </div>
           
-          <div className="lg:col-span-6 lg:pt-8 bg-transparent">
-            <p className="font-sans font-light text-sm md:text-base text-marfil/75 leading-relaxed">
-              Nuestras amenidades son de uso exclusivo para futuros residentes. Contamos con dos áreas destinadas a tal propósito: una enfocada en el bienestar y la recreación activa, que incorpora canchas deportivas, área de juegos para niños, jardines y espacios para mascotas; y una segunda zona de descanso con piscina, concebida para el disfrute y distensión en un entorno familiar. Queremos que su estancia se convierta en el paraíso y su vida en una experiencia.
+          <div className="lg:col-span-6 lg:pt-1.5 bg-transparent">
+            <p className="font-sans font-light text-sm md:text-base text-carbón-light/80 leading-relaxed">
+              Nuestras amenidades son de uso exclusivo para futuros residentes. Contamos con dos áreas destinadas a tal propósito: una enfocada en el bienestar y la recreación activa, que incorpora canchas deportivas, área de juegos para niños, jardines y espacios para mascotas; y una segunda zona de descanso con piscina, solarium y extensas áreas ajardinadas, que fortalecen la conexión con la naturaleza y la vida al aire libre, pensando siempre en el disfrute y la distensión en un entorno familiar. Queremos que su estancia se convierta en el paraíso y su vida en una experiencia.
             </p>
           </div>
         </div>
@@ -85,24 +91,22 @@ export const Amenidades: React.FC = () => {
           
           {/* Left Block: Checklists */}
           <div className="lg:col-span-5 space-y-4">
-            <h3 className="font-sans font-medium text-xs tracking-widest text-[#7C8578] uppercase mb-6">
+            <h3 className="font-sans font-medium text-xs tracking-widest text-[#4E5340] font-bold uppercase mb-6">
               Amenidades exclusivas como:
             </h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-y-2 gap-x-6">
               {amenitiesList.map((item, index) => (
                 <div
                   key={index}
-                  className="p-4 border border-arena-medium/15 bg-[#0B0D0D] transition-all duration-300 flex items-center gap-3.5 rounded-sm hover:border-arena-medium/30"
+                  className="flex items-center gap-2.5 py-0.5 group transition-colors duration-200"
                 >
-                  <div className="p-1.5 bg-black rounded-full border border-arena-medium/20 text-arena-medium flex-shrink-0">
-                    <CheckCircle2 className="w-3.5 h-3.5 stroke-[1.5]" />
-                  </div>
-                  <div>
-                    <span className="font-sans text-xs md:text-sm text-marfil/90 tracking-wide">
-                      {item}
-                    </span>
-                  </div>
+                  <span className="text-[#73634c] text-xs select-none group-hover:text-carbón transition-colors font-bold">
+                    —
+                  </span>
+                  <span className="font-sans text-xs sm:text-sm text-carbón-light/80 group-hover:text-carbón font-semibold transition-colors tracking-wide">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -121,8 +125,8 @@ export const Amenidades: React.FC = () => {
                     onClick={() => setActiveImageIndex(index)}
                     className={`w-8 h-1.5 transition-all rounded-full ${
                       activeImageIndex === index
-                        ? "bg-arena-medium w-10"
-                        : "bg-carbón hover:bg-arena-medium/50"
+                        ? "bg-carbón w-10"
+                        : "bg-arena-medium hover:bg-carbón/30"
                     }`}
                     aria-label={`Ir a imagen ${index + 1}`}
                   />
@@ -131,7 +135,7 @@ export const Amenidades: React.FC = () => {
             </div>
 
             {/* main slider frame */}
-            <div className="relative overflow-hidden rounded bg-black aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] shadow-2xl group border border-arena-medium/15">
+            <div className="relative overflow-hidden rounded bg-black aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] shadow-xl group border border-arena-medium/40">
               
               {/* Slide image with Framer Motion transitions */}
               <AnimatePresence mode="wait">
@@ -183,8 +187,8 @@ export const Amenidades: React.FC = () => {
                   onClick={() => setActiveImageIndex(index)}
                   className={`relative aspect-[16/10] overflow-hidden rounded-sm transition-all border duration-300 ${
                     activeImageIndex === index
-                      ? "border-arena-medium ring-2 ring-arena-medium/20 scale-[0.98]"
-                      : "border-arena-medium/25 hover:border-arena-medium opacity-65 hover:opacity-100"
+                      ? "border-carbón ring-2 ring-carbón/25 scale-[0.98]"
+                      : "border-arena-medium hover:border-carbón opacity-75 hover:opacity-100"
                   }`}
                 >
                   <img
