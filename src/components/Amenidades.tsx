@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MediaPlaceholder } from "./MediaPlaceholder";
 import {
@@ -22,6 +22,33 @@ import gazeboImg from "../assets/images/gazebo_bar_1780069282323.png";
 
 export const Amenidades: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Media query to check if user prefers reduced motion
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setShouldReduceMotion(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setShouldReduceMotion(e.matches);
+    mediaQuery.addEventListener("change", listener);
+
+    // IntersectionObserver to set will-change dynamically
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    return () => {
+      mediaQuery.removeEventListener("change", listener);
+      observer.unobserve(container);
+    };
+  }, []);
 
   const amenitiesList = [
     "Acceso al Beach Club",
@@ -66,144 +93,188 @@ export const Amenidades: React.FC = () => {
   };
 
   return (
-    <section id="amenidades" className="bg-arena-light py-20 md:py-32 px-6 md:px-12 relative text-carbón border-t border-arena-medium/40">
-      <div className="max-w-7xl mx-auto">
+    <section 
+      id="amenidades" 
+      ref={containerRef} 
+      className="bg-[#FAF7F0] py-20 md:py-32 px-6 md:px-12 relative text-carbón border-t border-arena-medium/40 overflow-hidden"
+    >
+      {/* 
+        MAIN GRID CONTAINER:
+        Using a custom 2-column layout on large screens (38% left column, 62% right column) 
+        and items-stretch to align top and bottom matches. 
+      */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[3.8fr_6.2fr] gap-12 lg:gap-16 items-stretch relative">
         
-         {/* Section Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 md:mb-24">
-          <div className="lg:col-span-6">
-            <h2 className="font-serif text-3xl sm:text-5xl md:text-5xl font-light tracking-tight text-carbón leading-tight">
-              El mar se encuentra con la arena.
-              <br />
-              <span className="italic font-normal text-carbón/70">El lujo, con el confort.</span>
-            </h2>
-          </div>
-          
-          <div className="lg:col-span-6 lg:pt-1.5 bg-transparent">
-            <p className="font-sans font-light text-sm md:text-base text-carbón-light/80 leading-relaxed">
-              Nuestras amenidades son de uso exclusivo para futuros residentes. Contamos con dos áreas destinadas a tal propósito: una enfocada en el bienestar y la recreación activa, que incorpora canchas deportivas, área de juegos para niños, jardines y espacios para mascotas; y una segunda zona de descanso con piscina, solarium y extensas áreas ajardinadas, que fortalecen la conexión con la naturaleza y la vida al aire libre, pensando siempre en el disfrute y la distensión en un entorno familiar. Queremos que su estancia se convierta en el paraíso y su vida en una experiencia.
-            </p>
-          </div>
-        </div>
+        {/* LEFT COLUMN: Text content block with staggered animation entry */}
+        <motion.div 
+          className="flex flex-col justify-between py-2 z-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1,
+              }
+            }
+          }}
+        >
+          {/* Main vertical content flow */}
+          <div className="flex flex-col">
+            {/* Title block adhering to Montserrat styling rules */}
+            <motion.h2 
+              className="flex flex-col leading-tight select-none mb-6"
+              variants={{
+                hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
+            >
+              <span className="font-sans font-normal text-3xl sm:text-4xl md:text-[42px] tracking-tight text-carbón">
+                El mar se encuentra con la arena.
+              </span>
+              <span className="font-sans font-light italic text-2xl sm:text-3xl md:text-[34px] tracking-normal text-carbón/60 mt-2">
+                El lujo, con el confort.
+              </span>
+            </motion.h2>
 
-        {/* List & Showcase Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Block: Checklists */}
-          <div className="lg:col-span-5 space-y-4">
-            <h3 className="font-sans font-medium text-xs tracking-widest text-[#4E5340] font-bold uppercase mb-6">
-              Amenidades exclusivas como:
-            </h3>
-            
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-y-2 gap-x-6">
+            {/* Narrow body paragraph with high-contrast text */}
+            <motion.p 
+              className="font-sans font-light text-sm md:text-[15px] text-carbón-light/80 leading-relaxed max-w-md"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { duration: 0.8 } }
+              }}
+            >
+              Nuestras amenidades son de uso exclusivo para futuros residentes. Contamos con dos áreas destinadas a tal propósito: una enfocada en el bienestar y la recreación activa, que incorpora canchas deportivas, área de juegos para niños, jardines "y espacios para mascotas; y una segunda zona de descanso con piscina, solarium" y extensas áreas ajardinadas, que fortalecen la conexión con la naturaleza y la vida al aire libre, pensando siempre en el disfrute y la distensión en un entorno familiar. Queremos que su estancia se convierta en el paraíso y su vida en una experiencia.
+            </motion.p>
+
+            {/* Separator Line (40px wide, color of mark Brand at 30% opac) */}
+            <motion.div 
+              className="w-10 h-[2px] bg-[#73634c]/30 my-8 md:my-10"
+              variants={{
+                hidden: { scaleX: 0 },
+                visible: { scaleX: 1, transition: { duration: 0.6 } }
+              }}
+              style={{ originX: 0 }}
+            />
+
+            {/* Capitalized Section Label */}
+            <motion.h3 
+              className="font-sans font-semibold text-2xs md:text-xs tracking-widest text-[#73634c] uppercase mb-5 select-none"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 }
+              }}
+            >
+              AMENIDADES EXCLUSIVAS COMO:
+            </motion.h3>
+
+            {/* 
+              INTERLOCKING BULLETS CONTAINER:
+              Renders 12 items in 2 columns of 6. Overlaps the right video/image slider 
+              by 64px on desktop with high-contrast background blur.
+            */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 lg:-mr-16 lg:pr-6 lg:pl-1 lg:py-5 lg:bg-[#FAF7F0]/90 lg:backdrop-blur-sm lg:rounded-r-xl relative z-30"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 }
+              }}
+            >
               {amenitiesList.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2.5 py-0.5 group transition-colors duration-200"
+                  className="flex items-center gap-2 py-0.5 group transition-colors duration-200"
                 >
-                  <span className="text-[#73634c] text-xs select-none group-hover:text-carbón transition-colors font-bold">
+                  <span className="text-[#73634c] text-xs select-none group-hover:text-carbón transition-colors font-semibold">
                     —
                   </span>
-                  <span className="font-sans text-xs sm:text-sm text-carbón-light/80 group-hover:text-carbón font-semibold transition-colors tracking-wide">
+                  <span className="font-sans text-xs sm:text-sm text-carbón-light/95 group-hover:text-carbón font-medium transition-colors tracking-wide">
                     {item}
                   </span>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
+        </motion.div>
 
-          {/* Right Block: Interactive Showcase Gallery (Navigation Carousel & Grid switcher) */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div />
-              
-              {/* Image Indicators */}
-              <div className="flex items-center gap-2">
-                {galleryImages.map((img, index) => (
-                  <button
-                    key={img.id}
-                    onClick={() => setActiveImageIndex(index)}
-                    className={`w-8 h-1.5 transition-all rounded-full ${
-                      activeImageIndex === index
-                        ? "bg-carbón w-10"
-                        : "bg-arena-medium hover:bg-carbón/30"
-                    }`}
-                    aria-label={`Ir a imagen ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
+        {/* 
+          RIGHT COLUMN: Cinema-grade Interactive Full-Bleed Slider with automatic baseline match 
+          Extends completely to the right edge of the viewport.
+        */}
+        <div 
+          className="lg:col-span-1 relative h-[56vh] lg:h-auto min-h-[350px] lg:min-h-0 overflow-hidden lg:-mr-[calc((100vw-min(100vw,1280px))/2+48px)] lg:rounded-l-3xl shadow-2xl group bg-[#161817]"
+        >
+          {/* Framer motion transition slide wrapper */}
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={activeImageIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <motion.img
+                src={galleryImages[activeImageIndex].url}
+                alt="Amenidad Exclusiva de Aura"
+                initial={{ scale: 1 }}
+                animate={!shouldReduceMotion ? { scale: 1.05 } : { scale: 1 }}
+                transition={{ duration: 10, ease: "easeOut" }}
+                className={`w-full h-full object-cover select-none ${
+                  isInViewport ? "will-change-transform" : ""
+                }`}
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+            </motion.div>
+          </AnimatePresence>
 
-            {/* main slider frame */}
-            <div className="relative overflow-hidden rounded bg-black aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/10] shadow-xl group border border-arena-medium/40">
-              
-              {/* Slide image with Framer Motion transitions */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeImageIndex}
-                  initial={{ opacity: 0.15, scale: 1.01 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0.15, scale: 0.99 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="absolute inset-0 w-full h-full"
-                >
-                  <img
-                    src={galleryImages[activeImageIndex].url}
-                    alt="Amenidad"
-                    className="w-full h-full object-cover select-none"
-                    referrerPolicy="no-referrer"
-                  />
-                </motion.div>
-              </AnimatePresence>
+          {/* Minimalist Overlay Gradient built for legibility */}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
 
-              {/* Slider Arrows */}
+          {/* SUTTLE ARROWS NAVEGATION: Minimal cost-effective overlay (appears on hover) */}
+          <button
+            onClick={handlePrevImage}
+            className="absolute left-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/35 backdrop-blur-md hover:bg-[#73634c] text-white transition-all rounded-full flex items-center justify-center z-25 opacity-0 group-hover:opacity-100 cursor-pointer shadow-lg border border-white/10"
+            aria-label="Imagen anterior de amenidad"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button
+            onClick={handleNextImage}
+            className="absolute right-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/35 backdrop-blur-md hover:bg-[#73634c] text-white transition-all rounded-full flex items-center justify-center z-25 opacity-0 group-hover:opacity-100 cursor-pointer shadow-lg border border-white/10"
+            aria-label="Siguiente imagen de amenidad"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* 
+            DOTS INDICATORS: 
+            Sleek minimalist circles placed elegantly at the bottom-left inside the image space.
+          */}
+          <div className="absolute bottom-6 left-6 flex items-center gap-2 z-25 bg-black/30 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/10 shadow-lg">
+            {galleryImages.map((_, index) => (
               <button
-                onClick={handlePrevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm hover:bg-arena-medium hover:text-black transition-colors rounded-full z-20 text-marfil opacity-0 group-hover:opacity-100 cursor-pointer shadow border border-marfil/5"
-                aria-label="Imagen anterior"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              
-              <button
-                onClick={handleNextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 backdrop-blur-sm hover:bg-arena-medium hover:text-black transition-colors rounded-full z-20 text-marfil opacity-0 group-hover:opacity-100 cursor-pointer shadow border border-marfil/5"
-                aria-label="Siguiente imagen"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-
-            </div>
-
-            {/* Thumbnail Selection List */}
-            <div className="grid grid-cols-4 gap-3 mt-4">
-              {galleryImages.map((img, index) => (
-                <button
-                  key={img.id}
-                  onClick={() => setActiveImageIndex(index)}
-                  className={`relative aspect-[16/10] overflow-hidden rounded-sm transition-all border duration-300 ${
-                    activeImageIndex === index
-                      ? "border-carbón ring-2 ring-carbón/25 scale-[0.98]"
-                      : "border-arena-medium hover:border-carbón opacity-75 hover:opacity-100"
-                  }`}
-                >
-                  <img
-                    src={img.url}
-                    alt="Miniatura de amenidad"
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-transparent hover:bg-black/20 transition-colors" />
-                </button>
-              ))}
-            </div>
-
+                key={index}
+                onClick={() => setActiveImageIndex(index)}
+                className={`w-2.5 h-2.5 transition-all rounded-full ${
+                  activeImageIndex === index
+                    ? "bg-white scale-110"
+                    : "bg-white/40 hover:bg-white/70"
+                }`}
+                aria-label={`Ir a imagen ${index + 1}`}
+              />
+            ))}
           </div>
-
         </div>
 
       </div>

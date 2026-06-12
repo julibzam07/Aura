@@ -304,8 +304,13 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
             <span className="text-[10px] tracking-[0.35em] uppercase text-[#73634c] font-bold mb-3 block">
               Consulte su futuro
             </span>
-            <h2 id="consulta-titulo-id" className="font-serif text-3xl md:text-4xl font-light tracking-wide text-carbón leading-none">
-              Consulte su futuro.
+            <h2 id="consulta-titulo-id" className="flex flex-col leading-tight mb-8 select-none">
+              <span className="font-normal text-3xl md:text-4xl tracking-wide text-carbón">
+                Consulte
+              </span>
+              <span className="font-light italic text-2xl md:text-3xl tracking-wide text-carbón/60 mt-2">
+                su futuro.
+              </span>
             </h2>
           </div>
 
@@ -406,7 +411,7 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
                         onFocus={handleInputFocus}
                         onChange={handleChange}
                         className="p-3 bg-arena-light border border-arena-medium focus:outline-none focus:border-carbón text-base text-carbón transition-colors rounded-sm"
-                        placeholder="Ej. Juan"
+                        placeholder="Ej. Román"
                         autoComplete="given-name"
                       />
                     </div>
@@ -423,7 +428,7 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
                         onFocus={handleInputFocus}
                         onChange={handleChange}
                         className="p-3 bg-arena-light border border-arena-medium focus:outline-none focus:border-carbón text-base text-carbón transition-colors rounded-sm"
-                        placeholder="Ej. Pérez"
+                        placeholder="Ej. Torres"
                         autoComplete="family-name"
                       />
                     </div>

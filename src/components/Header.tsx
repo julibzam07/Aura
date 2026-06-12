@@ -72,10 +72,10 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setView, onNavigate
           
           <button
             onClick={() => setView(currentView === "contact" ? "landing" : "contact")}
-            className="ml-4 px-6 py-2.5 bg-transparent text-carbón border border-carbón text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#73634c] hover:text-marfil hover:border-[#73634c] transition-all duration-300 flex items-center gap-2 cursor-pointer group rounded-sm"
+            className="ml-4 px-6 py-3 bg-transparent text-[#73634c] border border-[#73634c]/40 text-[11px] font-light tracking-[0.2em] uppercase hover:bg-[#73634c]/5 hover:border-[#73634c] transition-all duration-300 flex items-center gap-2 cursor-pointer group rounded-none min-h-[44px]"
           >
             {currentView === "contact" ? "Volver" : "Consultar"}
-            <ArrowRight className="w-3.5 h-3.5 text-carbón group-hover:text-marfil transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#73634c]/80 group-hover:text-[#73634c] transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </nav>
 
@@ -83,7 +83,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setView, onNavigate
         <div className="lg:hidden flex items-center gap-4">
           <button
             onClick={() => setView(currentView === "contact" ? "landing" : "contact")}
-            className="px-4 py-2 bg-transparent text-carbón text-[10px] tracking-widest uppercase font-bold border border-carbón hover:bg-[#73634c] hover:text-marfil hover:border-[#73634c] transition-all duration-300 rounded-sm"
+            className="px-5 py-3 bg-transparent text-[#73634c] text-[10px] tracking-wider uppercase font-light border border-[#73634c]/40 hover:bg-[#73634c]/5 hover:border-[#73634c] transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center min-h-[44px]"
           >
             {currentView === "contact" ? "Volver" : "Consultar"}
           </button>
@@ -114,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setView, onNavigate
                 setIsMobileMenuOpen(false);
                 setView("contact");
               }}
-              className="mt-4 px-6 py-3 bg-transparent text-carbón font-bold text-xs tracking-[0.2em] uppercase hover:bg-[#73634c] hover:text-marfil hover:border-[#73634c] transition-all duration-300 rounded-sm"
+              className="mt-4 px-6 py-3.5 bg-transparent text-[#73634c] font-light text-xs tracking-[0.2em] uppercase border border-[#73634c]/40 hover:bg-[#73634c]/5 hover:border-[#73634c] transition-all duration-300 rounded-none min-h-[44px] flex items-center justify-center"
             >
               Iniciar Consulta
             </button>

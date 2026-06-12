@@ -183,8 +183,13 @@ export const Precios: React.FC = () => {
             <span className="text-xs font-mono tracking-widest text-[#2B424D] uppercase mb-3 text-océano">
               Oportunidades de Bienestar
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-carbón leading-tight mb-6">
-              Invierta en su bienestar.
+            <h2 className="flex flex-col leading-tight mb-8 select-none">
+              <span className="font-normal text-3xl sm:text-4xl md:text-5xl tracking-wide text-carbón">
+                Invierta en
+              </span>
+              <span className="font-light italic text-2xl sm:text-3xl md:text-4xl tracking-wide text-carbón/60 mt-2.5">
+                su bienestar.
+              </span>
             </h2>
 
             <p className="font-sans font-light text-base text-carbón-light/85 leading-relaxed mb-8">

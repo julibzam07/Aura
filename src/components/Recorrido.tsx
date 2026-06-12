@@ -14,8 +14,13 @@ export const Recorrido: React.FC = () => {
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-carbón leading-tight mb-6">
-            Recorra sus sueños.
+          <h2 className="flex flex-col items-center leading-tight mb-8 select-none">
+            <span className="font-normal text-3xl sm:text-4xl md:text-5xl tracking-wide text-carbón">
+              Recorra
+            </span>
+            <span className="font-light italic text-2xl sm:text-3xl md:text-4xl tracking-wide text-carbón/60 mt-2.5">
+              sus sueños.
+            </span>
           </h2>
           
           <div className="w-12 h-px bg-carbón/30 mx-auto mb-6" />
@@ -26,7 +31,7 @@ export const Recorrido: React.FC = () => {
         </div>
 
         {/* Big interactive virtual tour iframe container frame */}
-        <div className="max-w-5xl mx-auto relative group shadow-2xl bg-marfil rounded overflow-hidden border border-arena-medium/55">
+        <div className="max-w-5xl mx-auto relative group bg-marfil rounded overflow-hidden border border-arena-medium/55">
           <div className="relative h-[450px] sm:h-[600px] w-full">
             <iframe
               src="/tour/index.html"

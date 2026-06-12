@@ -14,10 +14,13 @@ export const Ubicacion: React.FC = () => {
           {/* Left Column: Location Description */}
           <div className="col-span-1 lg:col-span-5 flex flex-col justify-center">
 
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-carbón leading-tight mb-6">
-              Ubicación: lejos y
-              <br />
-              <span className="italic font-normal text-carbón/70">cerca de todo.</span>
+            <h2 className="flex flex-col leading-tight mb-8 select-none">
+              <span className="font-normal text-3xl sm:text-4xl md:text-5xl tracking-wide text-carbón">
+                Ubicación: lejos y
+              </span>
+              <span className="font-light italic text-2xl sm:text-3xl md:text-4xl tracking-wide text-carbón/60 mt-2.5">
+                cerca de todo.
+              </span>
             </h2>
 
             <div className="h-px w-12 bg-carbón/30 mb-6" />
