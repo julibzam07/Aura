@@ -11,6 +11,27 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              // Separate lucide-react into an icons chunk as it contains lots of icons
+              if (id.includes('lucide-react')) {
+                return 'vendor-icons';
+              }
+              // Separate motion animations library
+              if (id.includes('motion')) {
+                return 'vendor-motion';
+              }
+              // General vendor bundle
+              return 'vendor-libs';
+            }
+          },
+        },
+      },
+      chunkSizeWarningLimit: 800,
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.

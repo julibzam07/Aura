@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -9,13 +9,23 @@ import { Modelos } from "./components/Modelos";
 import { Recorrido } from "./components/Recorrido";
 import { Precios } from "./components/Precios";
 import { Ubicacion } from "./components/Ubicacion";
-import { Contacto } from "./components/Contacto";
 import { FloatingWidgets } from "./components/FloatingWidgets";
 import { Sparkles, ArrowRight, ShieldCheck, Moon, Facebook, Instagram, Info } from "lucide-react";
+import { initScrollReveal } from "./utils/scrollReveal";
+
+// Lazy-load the heavy contact form / panel
+const Contacto = React.lazy(() =>
+  import("./components/Contacto").then((module) => ({ default: module.Contacto }))
+);
 
 export default function App() {
   const [view, setView] = useState<"landing" | "contact">("landing");
   const [isConsultaOpen, setIsConsultaOpen] = useState(false);
+
+  useEffect(() => {
+    const cleanup = initScrollReveal();
+    return cleanup;
+  }, [view]);
 
   const openConsulta = () => {
     setIsConsultaOpen(true);
@@ -94,7 +104,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="pt-[77px]">
+      <main>
         {/* 1) Intro / Hero Header */}
         <Hero onScrollDown={handleScrollDownFromHero} />
 
@@ -234,19 +244,16 @@ export default function App() {
               </p>
               <p className="font-sans text-carbón-light/80 space-y-1">
                 <span className="block text-carbón/55 text-[10px] uppercase font-bold">Correo Electrónico</span>
-                <a href="mailto:ventas@itsaura.pa" className="hover:text-[#73634c] transition-colors font-bold font-sans text-carbón">ventas@itsaura.pa</a>
+                <a href="mailto:info@itsaura.pa" className="hover:text-[#73634c] transition-colors font-bold font-sans text-carbón">info@itsaura.pa</a>
               </p>
             </div>
           </div>
 
           {/* Subfooter licensing details */}
-          <div className="max-w-7xl mx-auto border-t border-arena-medium/60 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-carbón/50">
-            <p>© 2026 AURA CORONADO — Paradise Point Residencia S.A. Todos los derechos reservados.</p>
-            <div className="flex gap-4 font-bold">
-              <span className="hover:text-carbón transition-colors cursor-pointer">Términos Legales</span>
-              <span>•</span>
-              <span className="hover:text-carbón transition-colors cursor-pointer">Políticas de Obra</span>
-            </div>
+          <div className="max-w-7xl mx-auto border-t border-arena-medium/60 mt-12 pt-8 text-[11px] leading-relaxed text-carbón/65 font-light text-left font-sans">
+            <p>
+              Promotora Paradise Point S.A. Precios sujetos a cambio y disponibilidad. Imágenes referenciales, pueden variar de la realidad y terminación final del proyecto. Rentabilidades históricas no garantizan resultados futuros.
+            </p>
           </div>
         </footer>
       </main>
@@ -254,8 +261,10 @@ export default function App() {
       {/* Persistence float interaction frames */}
       <FloatingWidgets />
 
-      {/* Panel de consultas (Inline in the DOM, always loaded, hidden when closed) */}
-      <Contacto isOpen={isConsultaOpen} onClose={closeConsulta} />
+      {/* Panel de consultas (Loaded lazily, saving weight of the main entry bundle) */}
+      <React.Suspense fallback={null}>
+        <Contacto isOpen={isConsultaOpen} onClose={closeConsulta} />
+      </React.Suspense>
 
     </div>
   );

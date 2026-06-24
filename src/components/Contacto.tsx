@@ -339,7 +339,7 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
             </a>
 
             <a
-              href="mailto:ventas@itsaura.pa"
+              href="mailto:info@itsaura.pa"
               className="flex items-center gap-4 text-xs font-medium tracking-wide text-carbón hover:text-carbón/80 transition-colors group p-3 bg-arena-light/50 border border-arena-medium/60 rounded-sm"
             >
               <div className="p-2.5 bg-arena-medium rounded-full border border-carbón/10 group-hover:scale-105 transition-transform">
@@ -347,7 +347,7 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
               </div>
               <div>
                 <p className="text-[9px] uppercase tracking-wider text-carbón-light/60 font-bold">Correo Electrónico</p>
-                <p className="text-xs font-bold font-mono">ventas@itsaura.pa</p>
+                <p className="text-xs font-bold font-mono">info@itsaura.pa</p>
               </div>
             </a>
 
@@ -538,7 +538,7 @@ export const Contacto: React.FC<ContactoProps> = ({ isOpen, onClose }) => {
                     Solicitud recibida correctamente
                   </h4>
                   <p className="font-sans font-light text-sm text-carbón-light/85 max-w-md leading-relaxed mb-6">
-                    Agradecemos su interés en el proyecto AURA. Un representative se pondrá en contacto con Usted a la brevedad.
+                    Agradecemos su interés en el proyecto AURA. Un representante se pondrá en contacto con usted a la brevedad.
                   </p>
                   <div className="h-px bg-carbón/20 w-16 mb-6" />
                   <button

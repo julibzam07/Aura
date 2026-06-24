@@ -15,10 +15,10 @@ import {
   Maximize2
 } from "lucide-react";
 
-import beachClubImg from "../assets/images/beach_club_1780069221234.png";
-import poolsImg from "../assets/images/resort_pools_1780069241691.png";
-import gymImg from "../assets/images/luxury_gym_1780069258603.png";
-import gazeboImg from "../assets/images/gazebo_bar_1780069282323.png";
+import beachClubImg from "../assets/images/beach_club_1780069221234.jpg";
+import poolsImg from "../assets/images/resort_pools_1780069241691.jpg";
+import gymImg from "../assets/images/luxury_gym_1780069258603.jpg";
+import gazeboImg from "../assets/images/gazebo_bar_1780069282323.jpg";
 
 export const Amenidades: React.FC = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -106,88 +106,49 @@ export const Amenidades: React.FC = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[3.8fr_6.2fr] gap-12 lg:gap-16 items-stretch relative">
         
         {/* LEFT COLUMN: Text content block with staggered animation entry */}
-        <motion.div 
-          className="flex flex-col justify-between py-2 z-20"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-10%" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1,
-              }
-            }
-          }}
-        >
+        <div className="flex flex-col justify-between py-2 z-20">
           {/* Main vertical content flow */}
           <div className="flex flex-col">
             {/* Title block adhering to Montserrat styling rules */}
-            <motion.h2 
-              className="flex flex-col leading-tight select-none mb-6"
-              variants={{
-                hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-              }}
-            >
-              <span className="font-sans font-normal text-3xl sm:text-4xl md:text-[42px] tracking-tight text-carbón">
+            <h2 className="flex flex-col leading-tight select-none mb-6">
+              <span className="font-sans font-normal text-3xl sm:text-4xl md:text-[42px] tracking-tight text-carbón" data-reveal="fade-up">
                 El mar se encuentra con la arena.
               </span>
-              <span className="font-sans font-light italic text-2xl sm:text-3xl md:text-[34px] tracking-normal text-carbón/60 mt-2">
+              <span className="font-sans font-light italic text-2xl sm:text-3xl md:text-[34px] tracking-normal text-carbón/60 mt-2" data-reveal="fade-up" data-reveal-delay="150">
                 El lujo, con el confort.
               </span>
-            </motion.h2>
+            </h2>
 
             {/* Narrow body paragraph with high-contrast text */}
-            <motion.p 
-              className="font-sans font-light text-sm md:text-[15px] text-carbón-light/80 leading-relaxed max-w-md"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { duration: 0.8 } }
-              }}
-            >
+            <p className="font-sans font-light text-sm md:text-[15px] text-carbón-light/80 leading-relaxed max-w-md" data-reveal="fade-up" data-reveal-duration="600" data-reveal-delay="300">
               Nuestras amenidades son de uso exclusivo para futuros residentes. Contamos con dos áreas destinadas a tal propósito: una enfocada en el bienestar y la recreación activa, que incorpora canchas deportivas, área de juegos para niños, jardines "y espacios para mascotas; y una segunda zona de descanso con piscina, solarium" y extensas áreas ajardinadas, que fortalecen la conexión con la naturaleza y la vida al aire libre, pensando siempre en el disfrute y la distensión en un entorno familiar. Queremos que su estancia se convierta en el paraíso y su vida en una experiencia.
-            </motion.p>
+            </p>
 
             {/* Separator Line (40px wide, color of mark Brand at 30% opac) */}
-            <motion.div 
+            <div 
               className="w-10 h-[2px] bg-[#73634c]/30 my-8 md:my-10"
-              variants={{
-                hidden: { scaleX: 0 },
-                visible: { scaleX: 1, transition: { duration: 0.6 } }
-              }}
-              style={{ originX: 0 }}
+              data-reveal="fade-up"
+              data-reveal-delay="350"
             />
 
             {/* Capitalized Section Label */}
-            <motion.h3 
-              className="font-sans font-semibold text-2xs md:text-xs tracking-widest text-[#73634c] uppercase mb-5 select-none"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1 }
-              }}
-            >
+            <h3 className="font-sans font-semibold text-2xs md:text-xs tracking-widest text-[#73634c] uppercase mb-5 select-none" data-reveal="fade-up" data-reveal-delay="400">
               AMENIDADES EXCLUSIVAS COMO:
-            </motion.h3>
+            </h3>
 
             {/* 
               INTERLOCKING BULLETS CONTAINER:
               Renders 12 items in 2 columns of 6. Overlaps the right video/image slider 
               by 64px on desktop with high-contrast background blur.
             */}
-            <motion.div 
-              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 lg:-mr-16 lg:pr-6 lg:pl-1 lg:py-5 lg:bg-[#FAF7F0]/90 lg:backdrop-blur-sm lg:rounded-r-xl relative z-30"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1 }
-              }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 lg:-mr-16 lg:pr-6 lg:pl-1 lg:py-5 lg:bg-[#FAF7F0]/90 lg:backdrop-blur-sm lg:rounded-r-xl relative z-30">
               {amenitiesList.map((item, index) => (
                 <div
                   key={index}
                   className="flex items-center gap-2 py-0.5 group transition-colors duration-200"
+                  data-reveal="fade-up"
+                  data-reveal-delay={450 + index * 60}
+                  data-reveal-duration="500"
                 >
                   <span className="text-[#73634c] text-xs select-none group-hover:text-carbón transition-colors font-semibold">
                     —
@@ -197,9 +158,9 @@ export const Amenidades: React.FC = () => {
                   </span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* 
           RIGHT COLUMN: Cinema-grade Interactive Full-Bleed Slider with automatic baseline match 
@@ -207,6 +168,8 @@ export const Amenidades: React.FC = () => {
         */}
         <div 
           className="lg:col-span-1 relative h-[56vh] lg:h-auto min-h-[350px] lg:min-h-0 overflow-hidden lg:-mr-[calc((100vw-min(100vw,1280px))/2+48px)] lg:rounded-l-3xl shadow-2xl group bg-[#161817]"
+          data-reveal="slide-in-right"
+          data-reveal-duration="1200"
         >
           {/* Framer motion transition slide wrapper */}
           <AnimatePresence mode="popLayout">

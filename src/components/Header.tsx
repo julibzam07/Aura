@@ -37,9 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setView, onNavigate
   return (
     <header
       id="main-nav-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-arena-light border-b border-arena-medium/40 shadow-sm ${
-        isScrolled ? "py-3.5" : "py-5"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-marfil py-4 text-carbón"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* LOGO AURA */}
@@ -98,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setView, onNavigate
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[77px] bg-arena-light border-b border-arena-medium/40 shadow-xl p-8 z-40 animate-fade-in-up">
+        <div className="lg:hidden fixed inset-x-0 top-[72px] bg-arena-light border-b border-arena-medium/40 shadow-xl p-8 z-40 animate-fade-in-up">
           <div className="flex flex-col gap-6 font-sans text-sm tracking-[0.15em] uppercase text-center">
             {navLinks.map((link) => (
               <button

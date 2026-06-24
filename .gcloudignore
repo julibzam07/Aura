@@ -1,0 +1,33 @@
+# This file specifies files that gcloud should ignore when uploading to Google Cloud Build.
+# It prevents heavy or sensitive local files from bloating the deployment archive.
+
+.gcloudignore
+.git
+.gitignore
+
+# Dependency directories
+node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+
+# Build and IDE files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.bak
+*~
+
+# Logs and system artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment files
+.env
+.env.local
+.env.production
+.env.development
